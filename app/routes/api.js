@@ -2,6 +2,8 @@ var User=require('../models/user')
 var config=require('../../config')
 var secretKey=config.secretKey
 var jsonwebtoken=require('jsonwebtoken')
+var Story=require('../models/story')
+
 
 function createToken(user){
     var token=jsonwebtoken.sign({
@@ -86,7 +88,7 @@ module.exports= function(app,express){
     })
 
 
-    app.use(function(req,res,next){
+    api.use(function(req,res,next){
         console.log("Somebody just came to the app!");
 
         var token=req.body.token|| req.param('token') || req.headers['x-access-token'];
@@ -110,6 +112,13 @@ module.exports= function(app,express){
             res.status(403).send({success:false, message:"No token provided"});
         }
     })
+
+    api.route('/')
+        .post(function(req,res){
+            var story=new story({
+                
+            })
+        })
 
     return api
 }

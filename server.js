@@ -4,7 +4,9 @@ var morgan=require("morgan")
 var config=require('./config')
 var mongoose=require('mongoose')
 
-mongoose.connect(config.database, function(err){
+
+mongoose.set('useCreateIndex',true)
+mongoose.connect(config.database, { useNewUrlParser: true },function(err){
     if(err){
         console.log(err);
     }
